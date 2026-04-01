@@ -4,6 +4,7 @@ This project includes:
 
 - A `network-inspection` deployment and service for in-cluster network troubleshooting.
 - An `nginx` deployment and service for a basic web workload.
+- A `password-vault-manager` deployment and service using Vaultwarden.
 
 ## Structure
 
@@ -11,6 +12,10 @@ This project includes:
 - `k8s/network-inspection-service.yaml`
 - `k8s/nginx-deployment.yaml`
 - `k8s/nginx-service.yaml`
+- `k8s/password-vault-secret.yaml`
+- `k8s/password-vault-pvc.yaml`
+- `k8s/password-vault-deployment.yaml`
+- `k8s/password-vault-service.yaml`
 - `argocd/network-tools-application.yaml`
 
 ## Prerequisites
@@ -35,10 +40,19 @@ kubectl get all
 # Describe resources
 kubectl describe deployment network-inspection
 kubectl describe deployment nginx
+kubectl describe deployment password-vault-manager
 
 # Get service endpoints
 kubectl get svc
 ```
+
+### Access password vault locally
+
+```bash
+kubectl port-forward svc/password-vault-manager 8082:80
+```
+
+Then open [http://localhost:8082](http://localhost:8082)
 
 ## Cleanup
 
