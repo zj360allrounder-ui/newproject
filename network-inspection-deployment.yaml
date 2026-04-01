@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: network-inspection
+  labels:
+    app: network-inspection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: network-inspection
+  template:
+    metadata:
+      labels:
+        app: network-inspection
+    spec:
+      containers:
+        - name: network-inspection
+          image: wbitt/network-multitool:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
